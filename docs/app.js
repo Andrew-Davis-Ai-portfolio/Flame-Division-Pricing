@@ -1,92 +1,53 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector(".fda-header");
-  const notifyBtn = document.getElementById("notifyBtn");
-  const notifyMessage = document.getElementById("notifyMessage");
-  const tierButtons = document.querySelectorAll(".tier-btn");
-  const demoLinks = document.querySelectorAll(".demo-btn");
-
-  /* Header scroll effect */
-  const handleScroll = () => {
-    if (window.scrollY > 20) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
-  };
-  handleScroll();
-  window.addEventListener("scroll", handleScroll);
-
-  /* Smooth scroll for anchor links */
-  const smoothScrollTo = (hash) => {
-    if (!hash || hash === "#") return;
-
-    const target = document.querySelector(hash);
-    if (target) {
-      const headerOffset = document.querySelector(".fda-header").offsetHeight || 0;
-      const elementPosition = target.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - (headerOffset + 12);
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth",
-      });
-    }
-  };
-
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const href = link.getAttribute("href");
-      if (href === "#") {
-        // For placeholder demo links we prevent default; logging handled separately.
-        event.preventDefault();
-        return;
-      }
-      event.preventDefault();
-      smoothScrollTo(href);
-    });
-  });
-
-  /* Tier buttons scroll to #start via data-scroll-target */
-  tierButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const targetSelector = btn.getAttribute("data-scroll-target") || "#start";
-      smoothScrollTo(targetSelector);
-    });
-  });
-
-  /* Demo buttons: prevent default and log */
-  demoLinks.forEach((demo) => {
-    demo.addEventListener("click", (event) => {
-      event.preventDefault();
-      const label = demo.textContent.trim();
-      console.log(`Open Deck demo clicked: ${label}`);
-    });
-  });
-
-  /* Get Notified button behavior */
-  if (notifyBtn && notifyMessage) {
-    notifyBtn.addEventListener("click", () => {
-      notifyMessage.textContent =
-        "Enrollment is currently invitation-only. Watch the Open Deck for signals.";
-    });
+  const btn = document.getElementById("fd-listen-btn");
+  if (!btn || !("speechSynthesis" in window)) {
+    console.log("🎧 No button or no speech synthesis support.");
+    return;
   }
-});
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("read-page-btn");
-  if (!btn) return;
+  let isSpeaking = false;
 
   btn.addEventListener("click", () => {
+    // If already speaking, stop
+    if (isSpeaking) {
+      speechSynthesis.cancel();
+      isSpeaking = false;
+      btn.textContent = "🔊 Listen";
+      return;
+    }
+
     const text = `
-      Flame Division Academy operates in the In-AI Era.
-      This page is informational and read-only.
-      Access is invite only.
-    `;
+      Flame Division Academy.
+      Training humans for the In A I Era.
+      Start in Tier zero if you are evaluating.
+      Move to Tier one if you are ready to learn.
+      Advance to Tier two if you are ready to operate.
+      Enrollment is invite only.
+    `.trim();
 
-    const utterance = new SpeechSynthesisUtterance(text.trim());
-    utterance.lang = navigator.language || "en-US";
+    const utterance = new SpeechSynthesisUtterance(text);
 
-    speechSynthesis.cancel(); // stops overlaps
+    // Try to match browser language, fall back to English
+    let lang = navigator.language || "en-US";
+    if (!lang.toLowerCase().startsWith("en")) {
+      lang = navigator.language;
+    }
+    utterance.lang = lang;
+
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+
+    utterance.onstart = () => {
+      isSpeaking = true;
+      btn.textContent = "⏹ Stop";
+    };
+
+    utterance.onend = () => {
+      isSpeaking = false;
+      btn.textContent = "🔊 Listen";
+    };
+
+    speechSynthesis.cancel();
     speechSynthesis.speak(utterance);
   });
 });
