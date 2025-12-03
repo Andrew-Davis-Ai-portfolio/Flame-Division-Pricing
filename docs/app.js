@@ -71,3 +71,22 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("read-page-btn");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    const text = `
+      Flame Division Academy operates in the In-AI Era.
+      This page is informational and read-only.
+      Access is invite only.
+    `;
+
+    const utterance = new SpeechSynthesisUtterance(text.trim());
+    utterance.lang = navigator.language || "en-US";
+
+    speechSynthesis.cancel(); // stops overlaps
+    speechSynthesis.speak(utterance);
+  });
+});
