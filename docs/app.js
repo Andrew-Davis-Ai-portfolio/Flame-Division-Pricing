@@ -101,3 +101,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+// Invite button drip-in
+window.addEventListener("DOMContentLoaded", () => {
+  const inviteBtn = document.querySelector(".fda-invite-btn");
+  if (inviteBtn) {
+    setTimeout(() => {
+      inviteBtn.classList.add("show");
+    }, 700); // small delay so it "drips" in after the page loads
+  }
+});
