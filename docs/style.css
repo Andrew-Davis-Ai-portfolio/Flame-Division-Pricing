@@ -754,3 +754,11 @@ section {
     bottom: 6.3rem;
   }
 }
+
+/* Brighten floating + inline CTA gold */
+.fab-pill,
+.fda-cta-main {
+  background: radial-gradient(circle at top left, #ffe8a3 0, #f5b544 45%, #171b26 100%);
+  color: #05070c;
+  box-shadow: 0 20px 54px rgba(0, 0, 0, 0.95);
+}
