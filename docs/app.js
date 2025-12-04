@@ -111,3 +111,30 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 700); // small delay so it "drips" in after the page loads
   }
 });
+
+const orientationText = `
+Welcome to Flame Division Academy.
+
+This is not a course platform.
+This is not motivational training.
+This is an operational discipline for the In-AI era.
+
+This academy exists for those who design, govern,
+or deploy AI systems that must survive leadership review and audit.
+
+If you are exploring, continue reading.
+If you are seeking shortcuts, this is not for you.
+
+This academy is not accessed by urgency.
+It is accessed by readiness.
+`;
+
+document.getElementById('flame-orientation-btn')
+  .addEventListener('click', () => {
+
+    const speech = new SpeechSynthesisUtterance(orientationText);
+    speech.lang = navigator.language || 'en-US';
+    speech.rate = 0.9;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(speech);
+  });
