@@ -764,3 +764,46 @@ section {
     0 18px 50px rgba(0,0,0,0.85),
     0 0 26px rgba(245, 196, 120, 0.75);
 }
+
+/* Floating CTA buttons (Invite + Join) */
+.fda-fab {
+  position: fixed;
+  right: 1.5rem;
+  z-index: 9999;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid rgba(245, 181, 68, 0.6);
+  background: radial-gradient(circle at top left, #f5b544 0, #171b26 40%, #05070c 100%);
+  color: #f7f7ff;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+/* Invite button a bit higher, Join closer to the bottom */
+.fda-fab-invite {
+  bottom: 5rem;
+}
+
+.fda-fab-join {
+  bottom: 2.2rem;
+}
+
+/* Hover states */
+.fda-fab:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.75);
+}
+
+/* Optional: hide on very small screens if you want */
+@media (max-width: 480px) {
+  .fda-fab {
+    right: 1rem;
+    padding: 0.7rem 1rem;
+    font-size: 0.8rem;
+  }
+}
