@@ -762,3 +762,22 @@ section {
   color: #05070c;
   box-shadow: 0 20px 54px rgba(0, 0, 0, 0.95);
 }
+
+#flame-orientation-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #f5c76a, #d4af37);
+  color: #0b0b0f;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 0 24px rgba(212,175,55,0.4);
+}
+
+#flame-orientation-btn:hover {
+  transform: scale(1.05);
+}
