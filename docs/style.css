@@ -763,6 +763,11 @@ section {
   box-shadow: 0 20px 54px rgba(0, 0, 0, 0.95);
 }
 
+/* Space between stacked FABs */
+#flame-fab .fab-pill + .fab-pill {
+  margin-top: 10px;
+}
+
 #flame-orientation-btn {
   position: fixed;
   bottom: 20px;
