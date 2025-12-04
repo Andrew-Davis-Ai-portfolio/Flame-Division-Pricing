@@ -789,10 +789,9 @@ section {
   bottom: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: flex-end;
   z-index: 9999;
 }
-
 /* Base floating button */
 .fab {
   display: inline-flex;
