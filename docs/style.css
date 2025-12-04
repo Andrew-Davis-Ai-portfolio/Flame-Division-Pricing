@@ -785,13 +785,14 @@ section {
 /* Floating CTA stack */
 #flame-fab {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 16px;
+  bottom: 16px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   z-index: 9999;
 }
+
 /* Base floating button */
 .fab {
   display: inline-flex;
